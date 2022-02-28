@@ -1,0 +1,126 @@
+﻿<Window x:Class="BHWPF.UI.Views.CalculationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BHWPF.UI.Views"
+        xmlns:conv="clr-namespace:BHWPF.UI.Helpers"
+        mc:Ignorable="d"
+        Title="Calculation" Height="450" Width="800">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <conv:BoolConvertor x:Key="oppositeConverter" />
+    </Window.Resources>
+    <Grid ShowGridLines="True" Height="404" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="0" Header="Specifications" Margin="0,10,0,0" FontWeight="Bold" Height="349" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="2" Width="342" IsEnabled="{Binding Path=IsClearFileButtonVisible, Converter={StaticResource oppositeConverter}}">
+            <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Top">
+                <GroupBox Header="Top Horizon" Width="330" Height="130" Margin="0,10,0,0">
+                    <Grid VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Lateral Dimension Size:" FontWeight="Bold" HorizontalAlignment="Left" Width="150"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Width="50" HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="LateralDimensionX" Text="{Binding Path=LateralDimensionX}" Margin="0,0,0,4"/>
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Content="X"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Width="50" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="LateralDimensionY" Text="{Binding Path=LateralDimensionY}"/>
+                        <Label Grid.Row="1" Grid.Column="0" Content="Lateral Grid Cell Size:" FontWeight="Bold" HorizontalAlignment="Left"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="GridCellSizeX" Text="{Binding Path=GridCellSizeX}"/>
+                        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Content="X"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Width="50" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="GridCellSizeY" Text="{Binding Path=GridCellSizeY}"/>
+                        <Label Grid.Row="2" Grid.Column="0" Content="Grid Cell Size Unit:" FontWeight="Bold" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="2" Grid.Column="1" Width="150" Content="Feet" FontWeight="Medium" HorizontalContentAlignment="Center"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Base Horizon" Width="330" Height="83" Margin="0,10,0,0">
+                    <Grid VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Top Horizon Distance:" FontWeight="Bold" HorizontalAlignment="Left" Width="150"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=TopHorizonDistanceMeter}" x:Name="TopHorizonDistanceMeter"/>
+                        <Label Grid.Row="0" Grid.Column="2" Content="Meter" HorizontalAlignment="Center"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Fluid Contact" Width="330" Height="83" Margin="0,10,0,0">
+                    <Grid VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Contact Distance:" FontWeight="Bold" HorizontalAlignment="Left" Width="150"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=FluidContactDistanceMeter}" x:Name="FluidContactDistanceMeter"/>
+                        <Label Grid.Row="0" Grid.Column="2" Content="Meter" HorizontalAlignment="Center"/>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="3" Header="Calculation" Margin="0,10,0,0" FontWeight="Bold" Height="349" VerticalAlignment="Top" HorizontalAlignment="Center" Width="346">
+            <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Top">
+                <GroupBox Header="Depth Values" Width="330"  Margin="0,10,0,0">
+                    <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Width="304" Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0" Margin="0,10,0,0" Content="Choose File (.csv)" Command="{Binding OpenFileCommand}"/>
+                        <Label Grid.Row="0" Grid.Column="1"  Margin="0,15,1,5" Content="{Binding SelectedFile}" Foreground="Crimson" HorizontalAlignment="Right" Width="101" VerticalAlignment="Center" HorizontalContentAlignment="Center"/>
+                        <Button Grid.Row="0" Grid.Column="2" Margin="0,10,0,0" Background="Transparent" BorderThickness="0" Content="X" Width="20" Command="{Binding OnClearFileCommand}" Visibility="{Binding Path=IsClearFileButtonVisible, Converter={StaticResource BoolToVis}}"  HorizontalAlignment="Right"  VerticalAlignment="Center" HorizontalContentAlignment="Center"  />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Result" Width="330"  Margin="0,10,0,0">
+                    <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Width="304" Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0"  Content="Unit Selection" FontWeight="Bold" HorizontalAlignment="Left" Width="150"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,40" Grid.RowSpan="2" ItemsSource="{Binding Path=CalculationTypes}" DisplayMemberPath="CalculationTypeName"
+                        SelectedValuePath="Id" SelectedValue="{Binding Path=SelectedCalculation}"  />
+                        <Button Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0" Content="Calculate" Command="{Binding OnCalculationCommand}" IsEnabled="{Binding Path=IsCalculationEnabled}"  />
+                        <Label Grid.Row="2" Grid.Column="0" Margin="0,0,0,0" Content="Volume Result" FontWeight="Bold" Foreground="Green" HorizontalAlignment="Left" Width="150"/>
+                        <Label Grid.Row="2" Grid.Column="1" Margin="0,0,0,0" Content="{Binding Path=VolumeResult}" FontWeight="Bold" Foreground="Green" HorizontalAlignment="Left" Width="150" x:Name="VolumeResult" />
+                        <!--<Label Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,0,0" Content="*" FontWeight="Bold" Foreground="#FFCE1F1F" VerticalAlignment="Center"/>-->
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>
